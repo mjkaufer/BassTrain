@@ -255,8 +255,8 @@ function gameStep(){
 }
 
 function readSettingsAndRestart(){
-	tabTime = parseInt($('tabTime').value)
-	noteTime = parseInt($('noteTime').value)
+	tabTime = parseInt($('tabTime').value) || 5000
+	noteTime = parseInt($('noteTime').value) || 4000
 	clearInterval(lastInterval)
 	lastInterval = startGame()
 }
