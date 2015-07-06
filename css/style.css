@@ -1,11 +1,30 @@
+/*PureCSS doesn't like it when we override their CSS, so the !important is a necessary evil*/
+
+body{
+	color: #2c3e50 !important;
+}
+
 #tab{
 	font-family: "Courier New", Courier, monospace;
 }
 
 .content-box{
-	border: solid black 1px;
-	min-height: 80vh;
+	min-height: 50vh;
 	margin: 2rem 0;
+	/*border: solid #3498db 0.125rem;*/
+}
+
+.inner-content-box{
+	height: 100%;
+	border: solid #16a085 0.25rem;
+	border-radius: 3rem;
+	position: relative;
+	min-height: inherit;
+
+}
+
+#update{
+	background-color: #1abc9c;
 }
 
 div{
@@ -13,10 +32,26 @@ div{
 }
 
 .padding{
-	padding: 1em;
+	padding: 1rem;
 }
 
 .centered{
 	margin-left: auto !important;
 	margin-right: auto !important;
+}
+
+a{
+	color: #2980b9;
+}
+
+a:visited{
+	color: #2980b9;
+}
+
+a:hover{
+	color: #3498db;
+}
+
+a:active{
+	color: #3498db;
 }

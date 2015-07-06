@@ -4,6 +4,9 @@ init()
 
 function init(){
 
+	hideResults()
+
+
 	chromatics = [
 		teoria.note('e2').scale('chromatic').notes(),
 		teoria.note('c3').scale('chromatic').notes(),
@@ -19,10 +22,6 @@ function init(){
 	strings = ["E", "A", "D", "G"]
 	remaining = []
 	lastNoteString = ""
-
-
-
-	hideResults()
 
 	chromatics = chromatics.reduce(function(prev, curr, index, arr){
 		return prev.concat(curr)
@@ -78,7 +77,7 @@ function plotRandomNote(){
 }
 
 function showNoteInfo(teoriaNote){
-	$('infoOutput').style.display = "none"
+	hideResults()
 	$('note').textContent = teoriaNote.name().toUpperCase()
 	$('octave').textContent = parseInt(teoriaNote.octave())
 	$('accidental').innerHTML = teoriaNote.accidental()
@@ -225,13 +224,13 @@ function generateTab(teoriaPitch){
 
 
 function hideResults(){
-	$('infoOutput').style.display = "none"
+	$('infoOutput').style.visibility = "hidden"
 }
 
 function showResults(teoriaNote){
 	if(teoriaNote)
 		showNoteInfo(teoriaNote)
-	$('infoOutput').style.display = ""
+	$('infoOutput').style.visibility = ""
 }
 
 
