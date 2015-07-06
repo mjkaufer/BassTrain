@@ -4,26 +4,72 @@
 	<head>
 		<title>BassTrain</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 		<script type="text/javascript" src="js/abcjs_basic_2.1-min.js"></script>
 		<script type="text/javascript" src="js/teoria.js"></script>
 
 	</head>
 
 	<body>
-		<div id="sheet">
-			<h3>Note</h3>
-			<div id="sheetOutput">
+		<div class="pure-g">
+
+			<div class="pure-u-3-24">
 
 			</div>
+
+			<div id="sheet" class="pure-u-6-24 content-box">
+				<h3>Sheet Music</h3>
+				<div id="sheetOutput">
+
+				</div>
+			</div>
+
+			<div class="pure-u-6-24">
+				<div class="padding">
+					<h3>Usage</h3>
+					<p>The program chooses a new note from E<sup>2</sup> to F<sup>4</sup> and displays it on the staff. Your job is to, on your bass guitar, find the fingering of the note.</p>
+					<p>After a couple of seconds, the tab for the note is shown on the side, along with the note name.</p>
+
+
+					<form class="pure-form pure-form-stacked">
+						<fieldset>
+							<legend>Settings</legend>
+
+							<label for="noteTime">Time to Show Note (ms)</label>
+							<input id="noteTime" type="number" placeholder="Time to Show Note" value="5000" class="pure-input-rounded centered">
+
+							<label for="tabTime">Time to Show Tab (ms)</label>
+							<input id="tabTime" type="number" placeholder="Time to Show Tab" value="4000" class="pure-input-rounded centered">
+
+							<button type="submit" class="pure-button pure-button-primary" id="update">Restart</button>
+						</fieldset>
+					</form>
+				</div>
+
+			</div>
+
+			<div class="pure-u-6-24 content-box" id="info">
+				<h3>Output</h3>
+				<div id="infoOutput">
+					<p>Tab</p>
+					<div id="tab">
+					</div>
+					<div id="info">
+						<p>Note: <span id="note"></span><span id="accidental"></span><sup id="octave"></sup></p>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 
-		<div id="infoOutput">
-			<h3>Tab</h3>
-			<div id="tab">
+		<div class="pure-g">
+			<div class="pure-u-6-24">
 			</div>
-			<h3>Note</h3>
-			<div id="info">
-				<p><span id="note"></span><span id="accidental"></span><sup id="octave"></sup></p>
+
+			<div class="pure-u-12-24">
+				<h4>By <a href="http://github.com/mjkaufer">mjkaufer</a></h4>
+				<h4><a href="http://github.com/mjkaufer/BassTrain">Fork on GitHub</a></h4>
 			</div>
 		</div>
 

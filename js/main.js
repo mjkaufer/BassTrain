@@ -1,48 +1,59 @@
-var baseNote = teoria.note('C3')
+var chromatics, pitchMap, maxFret, strings, remaining, lastNoteString, noteTime, tabTime, lastInterval;
 
-var chromatics = [
-	teoria.note('e2').scale('chromatic').notes(),
-	teoria.note('c3').scale('chromatic').notes(),
-	teoria.note('g#3').scale('chromatic').notes(),
-]
+init()
+
+function init(){
+
+	chromatics = [
+		teoria.note('e2').scale('chromatic').notes(),
+		teoria.note('c3').scale('chromatic').notes(),
+		teoria.note('g#3').scale('chromatic').notes(),
+	]
 
 
 
-var pitchMap = {}
+	pitchMap = {}
 
-var maxFret = 20;
+	maxFret = 20;
 
-var strings = ["E", "A", "D", "G"]
-var remaining = []
-var lastNoteString = ""
+	strings = ["E", "A", "D", "G"]
+	remaining = []
+	lastNoteString = ""
 
-var noteTime = 5000
-var resultTime = 4000
 
-hideResults()
 
-chromatics = chromatics.reduce(function(prev, curr, index, arr){
-	return prev.concat(curr)
-}, [])
+	hideResults()
 
-chromatics = chromatics.reduce(function(prev, curr, index, arr){
-	var unique = prev.every(function(el){
-		return el.toString() != curr.toString()
+	chromatics = chromatics.reduce(function(prev, curr, index, arr){
+		return prev.concat(curr)
+	}, [])
+
+	chromatics = chromatics.reduce(function(prev, curr, index, arr){
+		var unique = prev.every(function(el){
+			return el.toString() != curr.toString()
+		})
+		if(unique)
+			prev.push(curr)
+		return prev
+	}, [])
+
+	chromatics.forEach(function(e, i){
+
+		var stringFrets = makeStringFrets(i)
+
+		pitchMap[e.toString()] = stringFrets
+
 	})
-	if(unique)
-		prev.push(curr)
-	return prev
-}, [])
 
-chromatics.forEach(function(e, i){
+	readSettingsAndRestart()
 
-	var stringFrets = makeStringFrets(i)
+	$('update').onclick = function(e){
+		e.preventDefault()
+		readSettingsAndRestart()
+	}
 
-	pitchMap[e.toString()] = stringFrets
 
-})
-
-startGame()
+}
 
 function makeNote(note){
 
@@ -228,7 +239,7 @@ function startGame(){
 	gameStep()
 	return  setInterval(function(){
 		gameStep()
-	}, noteTime + resultTime)
+	}, noteTime + tabTime)
 }
 
 function gameStep(){
@@ -241,4 +252,11 @@ function gameStep(){
 	setTimeout(function(){
 		showResults(note)
 	}, noteTime)
+}
+
+function readSettingsAndRestart(){
+	tabTime = parseInt($('tabTime').value)
+	noteTime = parseInt($('noteTime').value)
+	clearInterval(lastInterval)
+	lastInterval = startGame()
 }

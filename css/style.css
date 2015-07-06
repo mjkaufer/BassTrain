@@ -1,3 +1,22 @@
 #tab{
 	font-family: "Courier New", Courier, monospace;
 }
+
+.content-box{
+	border: solid black 1px;
+	min-height: 80vh;
+	margin: 2rem 0;
+}
+
+div{
+	text-align: center;
+}
+
+.padding{
+	padding: 1em;
+}
+
+.centered{
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
