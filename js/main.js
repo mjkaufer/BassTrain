@@ -1,6 +1,24 @@
-var chromatics, pitchMap, maxFret, strings, remaining, lastNoteString, noteTime, tabTime, lastInterval;
+var chromatics, pitchMap, maxFret, strings, remaining, lastNoteString, noteTime, tabTime, lastInterval, nextTimeout;
 
 init()
+
+function makeChromatic(octave){
+	var notes = []
+	for(var i = "a".charCodeAt(0); i <= "g".charCodeAt(0); i++){
+
+		var letter = String.fromCharCode(i)
+
+		if("abe".indexOf(letter) > -1)//flats
+			notes.push(teoria.note(letter + 'b' + octave))
+
+		notes.push(teoria.note(letter + octave))
+
+		if("cf".indexOf(letter) > -1)
+			notes.push(teoria.note(letter + '#' + octave))
+	}
+
+	return notes
+}
 
 function init(){
 
@@ -8,9 +26,9 @@ function init(){
 
 
 	chromatics = [
-		teoria.note('e2').scale('chromatic').notes(),
-		teoria.note('c3').scale('chromatic').notes(),
-		teoria.note('g#3').scale('chromatic').notes(),
+		makeChromatic(2).slice(8),
+		makeChromatic(3),
+		makeChromatic(4)
 	]
 
 
@@ -29,7 +47,7 @@ function init(){
 
 	chromatics = chromatics.reduce(function(prev, curr, index, arr){
 		var unique = prev.every(function(el){
-			return el.toString() != curr.toString()
+			return el.chroma() != curr.toString()
 		})
 		if(unique)
 			prev.push(curr)
@@ -248,7 +266,7 @@ function gameStep(){
 
 	convertNote(note.toString())
 
-	setTimeout(function(){
+	nextTimeout = setTimeout(function(){
 		showResults(note)
 	}, noteTime)
 }
@@ -257,5 +275,7 @@ function readSettingsAndRestart(){
 	tabTime = parseInt($('tabTime').value) || 5000
 	noteTime = parseInt($('noteTime').value) || 4000
 	clearInterval(lastInterval)
+	clearTimeout(nextTimeout)
 	lastInterval = startGame()
+
 }
