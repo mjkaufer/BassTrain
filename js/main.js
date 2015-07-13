@@ -142,12 +142,20 @@ function makeAbcNote(teoriaNote){
 
 	abcNote += ",,,,,";
 
+	if("ab".indexOf(noteName) != -1)
+		abcNote += ","
+
 	for(var i = 0; i < octave; i++){
 		if(abcNote.slice(-1) == ",")
 			abcNote = abcNote.substring(0, abcNote.length - 1)
 		else
-			abcNote += ","
+			// abcNote += ","
+			abcNote += "'"
 	}
+
+
+
+
 
 	renderNote(abcNote)
 	return abcNote
